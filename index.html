@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mokodomo — Livraison de repas au Sénégal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#"><img src="logo_mokodomo.png" alt="Mokodomo"><span class="nav-logo-t">Moko<em>domo</em></span></a>
+  <ul class="nav-links">
+    <li><a href="#how">Comment ça marche</a></li>
+    <li><a href="#features">Fonctionnalités</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#partners">Partenaires</a></li>
+    <li><a href="#reviews">Avis</a></li>
+  </ul>
+  <a href="#cta" class="nav-btn">↓ Télécharger</a>
+  <button class="hamburger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOB NAV -->
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" id="mobClose">✕</button>
+  <a href="#how" onclick="closeMob()">Comment ça marche</a>
+  <a href="#features" onclick="closeMob()">Fonctionnalités</a>
+  <a href="#menu" onclick="closeMob()">Menu</a>
+  <a href="#partners" onclick="closeMob()">Partenaires</a>
+  <a href="#reviews" onclick="closeMob()">Avis</a>
+  <a href="#cta" class="nav-btn" onclick="closeMob()">Télécharger</a>
+</div>
+
+<!-- HERO -->
+<div class="hero-wrap">
+<section class="hero" id="home">
+
+  <!-- GAUCHE -->
+  <div class="hero-left" style="position:relative;z-index:2">
+    <div class="hero-badge">🇸🇳 Disponible au Sénégal</div>
+
+    <h1 class="hero-h1">
+      Votre repas,<br>
+      <span class="or">livré en 18 min</span><br>
+      chrono.
+    </h1>
+
+    <p class="hero-p">Mokodomo connecte les meilleurs restaurants sénégalais à votre porte. Paiement Wave ou Orange Money, suivi GPS en temps réel.</p>
+
+    <div class="hero-btns">
+      <a href="#cta" class="btn-dark">▶ Télécharger gratuitement</a>
+      <a href="#how"  class="btn-light">Comment ça marche →</a>
+    </div>
+
+    <div class="hero-proof">
+      <div class="proof-avs">
+        <div class="proof-av" style="background:linear-gradient(135deg,#F5A623,#e84343)">A</div>
+        <div class="proof-av" style="background:linear-gradient(135deg,#22C55E,#1a9e5a)">M</div>
+        <div class="proof-av" style="background:linear-gradient(135deg,#9B59B6,#6C3483)">F</div>
+        <div class="proof-av" style="background:linear-gradient(135deg,#E8720C,#c45a08)">O</div>
+      </div>
+      <span class="proof-txt"><strong>+50 000 clients</strong> nous font confiance</span>
+    </div>
+
+    <!-- Mini stats -->
+    <div class="mini-stats" style="display:flex;gap:18px;padding-top:22px;border-top:1px solid var(--b);margin-top:22px;opacity:0;animation:fadeUp .5s .75s ease both">
+      <div><div style="font-family:var(--disp);font-size:1.5rem;font-weight:800;color:var(--or);line-height:1" data-to="2400" data-sfx="+">2400+</div><div style="font-size:.6rem;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-top:3px">Restaurants</div></div>
+      <div style="width:1px;background:var(--b)"></div>
+      <div><div style="font-family:var(--disp);font-size:1.5rem;font-weight:800;color:var(--or);line-height:1" data-to="18" data-sfx=" min">18 min</div><div style="font-size:.6rem;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-top:3px">Délai moyen</div></div>
+      <div style="width:1px;background:var(--b)"></div>
+      <div><div style="font-family:var(--disp);font-size:1.5rem;font-weight:800;color:var(--or);line-height:1" data-to="4.9" data-sfx="★">4.9★</div><div style="font-size:.6rem;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-top:3px">Note app</div></div>
+    </div>
+  </div>
+
+  <!-- DROITE : TÉLÉPHONE -->
+  <div class="hero-right">
+    <div class="phone-scene">
+      <div class="phone-body">
+        <div class="ph-notch"></div>
+        <div class="ph-screen">
+          <div class="ph-top">
+            <div><div class="ph-loc">📍 Plateau, Dakar</div><div class="ph-hi">Bonjour Amadou 👋</div></div>
+            <div class="ph-av">A</div>
+          </div>
+          <div class="ph-search">🔍 Rechercher un plat...</div>
+          <div class="ph-cats">
+            <div class="ph-cat on">Tout</div>
+            <div class="ph-cat">Thiébou</div>
+            <div class="ph-cat">Viandes</div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-card-img"><img src="athieke.png" alt="Attiéké"></div>
+            <div class="ph-card-bd">
+              <div class="ph-card-name">Attiéké Poisson</div>
+              <div class="ph-card-meta">Chez Mama Coumba · 1.2 km</div>
+              <div class="ph-card-row"><div class="ph-price">2 200 FCFA</div><div class="ph-btn">Voir →</div></div>
+            </div>
+          </div>
+          <div class="ph-card">
+            <div class="ph-card-img" style="height:50px"><img src="yassa_poulet.png" alt="Yassa" style="height:50px"></div>
+            <div class="ph-card-bd">
+              <div class="ph-card-name">Yassa Poulet</div>
+              <div class="ph-card-meta">Le Baobab · 0.8 km</div>
+              <div class="ph-card-row"><div class="ph-price">2 800 FCFA</div><div class="ph-btn">Voir →</div></div>
+            </div>
+          </div>
+          <div class="ph-live">
+            <div class="ph-live-dot"></div>
+            <div><div class="ph-live-txt">Livreur en route · 12 min</div><div class="ph-live-sub">Ibrahima · Plateau</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fl fl1"><span class="fl-ico">💳</span><div><div class="fl-t">Paiement réussi</div><div class="fl-s">Wave · 2 200 FCFA</div></div></div>
+      <div class="fl fl2"><span class="fl-ico">⭐</span><div><div class="fl-t">Note 4.9 / 5</div><div class="fl-s">50 000+ avis</div></div></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><span>Défiler</span><div class="scroll-line"></div></div>
+</section>
+</div>
+
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner">
+  <div class="ti"><b>🍚 Thiéboudiène</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>💳 Wave & Orange Money</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🛵 Livraison 18 min</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🍗 Yassa Poulet</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🗺️ Suivi GPS live</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🥘 Mafé Bœuf</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>⭐ Note 4.9/5</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🍕 Pizzas & Burgers</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🇸🇳 100% Sénégalais</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🥤 Bissap & Ditakh</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🍚 Thiéboudiène</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>💳 Wave & Orange Money</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🛵 Livraison 18 min</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🍗 Yassa Poulet</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🗺️ Suivi GPS live</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🥘 Mafé Bœuf</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>⭐ Note 4.9/5</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🍕 Pizzas & Burgers</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🇸🇳 100% Sénégalais</b><span class="ti-dot">✦</span></div>
+  <div class="ti"><b>🥤 Bissap & Ditakh</b><span class="ti-dot">✦</span></div>
+</div></div>
+
+<!-- HOW — FLIP CARDS -->
+<div class="bg-white"><div class="sec" id="how">
+  <div class="rv"><span class="tag">Simple comme bonjour</span></div>
+  <h2 class="h2 rv d1">Commander en <em>4 étapes</em></h2>
+  <p class="sub rv d2">Survolez chaque étape pour en savoir plus.</p>
+  <div class="steps">
+    <!-- Carte 1 -->
+    <div class="flip-wrap rv-card">
+      <div class="flip-card">
+        <div class="flip-front">
+          <div class="flip-n">01</div>
+          <span class="flip-ico">📲</span>
+          <div class="flip-t">Téléchargez l'app</div>
+          <span class="flip-hint">Survolez →</span>
+        </div>
+        <div class="flip-back">
+          <div class="flip-back-t">Téléchargez</div>
+          <p class="flip-back-d">Disponible sur Google Play et en APK direct. Installation gratuite en 30 secondes.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Carte 2 -->
+    <div class="flip-wrap rv-card d1">
+      <div class="flip-card">
+        <div class="flip-front">
+          <div class="flip-n">02</div>
+          <span class="flip-ico">🔍</span>
+          <div class="flip-t">Choisissez votre plat</div>
+          <span class="flip-hint">Survolez →</span>
+        </div>
+        <div class="flip-back">
+          <div class="flip-back-t">Choisissez</div>
+          <p class="flip-back-d">800+ plats locaux, viandes, pizzas et boissons. Filtrez par quartier ou restaurant.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Carte 3 -->
+    <div class="flip-wrap rv-card d2">
+      <div class="flip-card">
+        <div class="flip-front">
+          <div class="flip-n">03</div>
+          <span class="flip-ico">💳</span>
+          <div class="flip-t">Payez en 1 clic</div>
+          <span class="flip-hint">Survolez →</span>
+        </div>
+        <div class="flip-back">
+          <div class="flip-back-t">Payez</div>
+          <p class="flip-back-d">Wave, Orange Money ou Free Money. Paiement instantané et sécurisé. Zéro carte bancaire.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Carte 4 -->
+    <div class="flip-wrap rv-card d3">
+      <div class="flip-card">
+        <div class="flip-front">
+          <div class="flip-n">04</div>
+          <span class="flip-ico">🛵</span>
+          <div class="flip-t">Recevez votre repas</div>
+          <span class="flip-hint">Survolez →</span>
+        </div>
+        <div class="flip-back">
+          <div class="flip-back-t">Recevez</div>
+          <p class="flip-back-d">Livreur suivi en direct sur la carte GPS. Livraison garantie en moins de 20 minutes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- FEATURES — FLIP BENTO -->
+<div class="bg-cream" id="features"><div class="sec-inner">
+  <div class="rv"><span class="tag">Pourquoi Mokodomo</span></div>
+  <h2 class="h2 rv d1">Conçu pour le marché <em>sénégalais</em></h2>
+  <p class="sub rv d2">Survolez chaque carte pour découvrir les détails.</p>
+  <div class="bento">
+    <!-- Wide -->
+    <div class="bento-flip wide rv-card">
+      <div class="flip-card">
+        <div class="bc-front">
+          <div class="bc-ico">💳</div>
+          <div class="bc-t">Paiement Mobile Local</div>
+          <p class="bc-preview">Wave, Orange Money, Free Money...</p>
+        </div>
+        <div class="bc-back">
+          <div class="bc-back-t">Paiement Zéro Friction</div>
+          <p class="bc-back-d">Réglez avec les solutions que vous utilisez au quotidien. Instantané, sécurisé, sans carte bancaire.</p>
+          <div class="pay-chips"><div class="pay-chip">🌊 Wave</div><div class="pay-chip">🍊 Orange Money</div><div class="pay-chip">📱 Free Money</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- GPS -->
+    <div class="bento-flip rv-card d1">
+      <div class="flip-card">
+        <div class="bc-front"><div class="bc-ico g">🗺️</div><div class="bc-t">Suivi GPS Temps Réel</div><p class="bc-preview">Votre livreur sur la carte...</p></div>
+        <div class="bc-back"><div class="bc-back-t">GPS en Direct</div><p class="bc-back-d">Suivez votre livreur à chaque instant sur OpenStreetMap. Sachez exactement où est votre repas.</p><div class="bc-back-tag g">OpenStreetMap</div></div>
+      </div>
+    </div>
+    <!-- Fraîcheur -->
+    <div class="bento-flip rv-card">
+      <div class="flip-card">
+        <div class="bc-front"><div class="bc-ico">⚡</div><div class="bc-t">Fraîcheur Garantie</div><p class="bc-preview">Retard ? Remboursement...</p></div>
+        <div class="bc-back"><div class="bc-back-t">Fraîcheur Garantie</div><p class="bc-back-d">Délais stricts et emballage thermique. Repas froid ou en retard ? Remboursement immédiat, sans question.</p><div class="bc-back-tag">Garantie Mokodomo</div></div>
+      </div>
+    </div>
+    <!-- Saveurs -->
+    <div class="bento-flip rv-card d1">
+      <div class="flip-card">
+        <div class="bc-front"><div class="bc-ico g">🌿</div><div class="bc-t">Saveurs Locales</div><p class="bc-preview">800+ recettes sénégalaises...</p></div>
+        <div class="bc-back"><div class="bc-back-t">Cuisine Locale</div><p class="bc-back-d">Thiéboudiène, Yassa, Mafé, Ceebu Yapp. La gastronomie sénégalaise au premier plan.</p><div class="bc-back-tag g">800+ recettes</div></div>
+      </div>
+    </div>
+    <!-- Notifs -->
+    <div class="bento-flip rv-card d2">
+      <div class="flip-card">
+        <div class="bc-front"><div class="bc-ico">🔔</div><div class="bc-t">Notifications Live</div><p class="bc-preview">Chaque étape en temps réel...</p></div>
+        <div class="bc-back"><div class="bc-back-t">Toujours informé</div><p class="bc-back-d">Confirmation, préparation, départ livreur. Chaque étape de votre commande notifiée instantanément.</p><div class="bc-back-tag">Temps réel</div></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- 18 MIN -->
+<div class="bg-white"><div class="sec">
+  <div class="min-wrap">
+    <div class="rv-left">
+      <div class="min-big">1<span>8</span></div>
+      <div class="min-unit">minutes en moyenne</div>
+      <p style="font-size:.88rem;color:var(--t2);line-height:1.7;margin-bottom:24px;max-width:360px">Pas une promesse marketing — une garantie mesurée sur chaque commande passée sur Mokodomo.</p>
+      <a href="#cta" class="btn-dark">Tester maintenant →</a>
+    </div>
+    <div class="min-rows rv-right d1">
+      <div class="min-row"><span class="min-row-ico">📍</span><div><div class="min-row-t">Géolocalisation précise</div><div class="min-row-s">Le livreur le plus proche assigné automatiquement</div></div></div>
+      <div class="min-row"><span class="min-row-ico">🛵</span><div><div class="min-row-t">500+ livreurs actifs à Dakar</div><div class="min-row-s">Réseau dense, couverture Grand Dakar</div></div></div>
+      <div class="min-row"><span class="min-row-ico">🔥</span><div><div class="min-row-t">Emballage thermique</div><div class="min-row-s">Sacs isothermes fournis à tous nos partenaires</div></div></div>
+      <div class="min-row"><span class="min-row-ico">🤖</span><div><div class="min-row-t">Routage intelligent</div><div class="min-row-s">Trajet optimal calculé en temps réel</div></div></div>
+    </div>
+  </div>
+</div></div>
+
+<!-- MENU -->
+<div class="bg-cream" id="menu"><div class="sec-inner">
+  <div class="menu-head rv">
+    <div><span class="tag">Aperçu du menu</span><h2 class="h2" style="margin-top:8px">Ce soir, vous mangez <em>quoi ?</em></h2></div>
+    <div class="tabs">
+      <button class="tab-btn on" data-tab="local">🍚 Locaux</button>
+      <button class="tab-btn" data-tab="viandes">🥩 Viandes</button>
+      <button class="tab-btn" data-tab="pizzas">🍕 Pizzas</button>
+      <button class="tab-btn" data-tab="autres">🥗 Autres</button>
+    </div>
+  </div>
+  <div class="food-grid" id="foodGrid"></div>
+</div></div>
+
+<!-- PARTNERS -->
+<div class="bg-white"><div class="sec" id="partners">
+  <div class="part-wrap">
+    <div class="rv-left">
+      <span class="tag">Pour les restaurateurs</span>
+      <h2 class="h2" style="margin-top:8px">Développez votre restaurant <em>avec nous</em></h2>
+      <p class="sub">Rejoignez 2 400+ restaurateurs sénégalais qui ont boosté leurs ventes avec Mokodomo.</p>
+      <ul class="check-list">
+        <li class="cli"><span class="cli-dot">✓</span>Dashboard temps réel (revenus, commandes, avis)</li>
+        <li class="cli"><span class="cli-dot">✓</span>Gestion menu et disponibilités à tout moment</li>
+        <li class="cli"><span class="cli-dot">✓</span>Virements automatiques Wave ou Orange Money</li>
+        <li class="cli"><span class="cli-dot">✓</span>Support 7j/7 en français et wolof</li>
+      </ul>
+      <a href="#" class="btn-dark">Devenir partenaire →</a>
+    </div>
+    <div class="dash rv-right d1">
+      <div class="dash-top"><span class="dash-title">Dashboard Restaurateur</span><span class="dash-live">En direct</span></div>
+      <div class="dash-body">
+        <div class="kpis">
+          <div class="kpi"><div class="kpi-v">847 500</div><div class="kpi-l">Revenus FCFA</div></div>
+          <div class="kpi"><div class="kpi-v">143</div><div class="kpi-l">Commandes</div></div>
+          <div class="kpi"><div class="kpi-v">4.8★</div><div class="kpi-l">Note moyenne</div></div>
+          <div class="kpi"><div class="kpi-v">94%</div><div class="kpi-l">Satisfaction</div></div>
+        </div>
+        <div class="chart-wrap"><div class="chart-lbl">Ventes — 7 derniers jours</div>
+          <div class="bars"><div class="bar" style="height:38%"></div><div class="bar" style="height:52%"></div><div class="bar" style="height:44%"></div><div class="bar" style="height:70%"></div><div class="bar" style="height:60%"></div><div class="bar" style="height:84%"></div><div class="bar" style="height:100%"></div></div>
+        </div>
+        <div class="orders">
+          <div class="ord"><span class="ord-n">🍚 Thiébou Dieune ×2</span><span class="ord-s live">En route</span></div>
+          <div class="ord"><span class="ord-n">🍗 Yassa Poulet ×1</span><span class="ord-s prep">Préparation</span></div>
+          <div class="ord"><span class="ord-n">🍕 Pizza Mozzarella ×2</span><span class="ord-s live">Livré ✓</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- REVIEWS -->
+<div class="bg-cream" id="reviews"><div class="sec-inner">
+  <div class="rv" style="text-align:center"><span class="tag">Avis clients</span></div>
+  <h2 class="h2 rv d1" style="text-align:center;margin-top:8px">Ils nous font <em>confiance</em></h2>
+  <div class="rev-grid">
+    <div class="rev rv-card"><div class="rev-stars">★★★★★</div><p class="rev-q">"Thiéboudiène pour toute ma famille, livré en 20 min encore chaud. Comme si Mama venait de le préparer !"</p><div class="rev-foot"><div class="rev-av" style="background:linear-gradient(135deg,#F5A623,#e84343)">A</div><div><div class="rev-name">Aminata Diallo</div><div class="rev-loc">Plateau, Dakar</div></div></div></div>
+    <div class="rev rv-card d1"><div class="rev-stars">★★★★★</div><p class="rev-q">"Paiement Wave en 3 clics, livraison ponctuelle. De loin la meilleure app de livraison du Sénégal."</p><div class="rev-foot"><div class="rev-av" style="background:linear-gradient(135deg,#22C55E,#1a9e5a)">M</div><div><div class="rev-name">Moussa Ndiaye</div><div class="rev-loc">Mermoz, Dakar</div></div></div></div>
+    <div class="rev rv-card d2"><div class="rev-stars">★★★★☆</div><p class="rev-q">"J'habite Saint-Louis, livraison rapide et plat délicieux. Vraiment impressionnant !"</p><div class="rev-foot"><div class="rev-av" style="background:linear-gradient(135deg,#9B59B6,#6C3483)">F</div><div><div class="rev-name">Fatou Mbaye</div><div class="rev-loc">Saint-Louis</div></div></div></div>
+    <div class="rev rv-card d3"><div class="rev-stars">★★★★★</div><p class="rev-q">"En tant que restaurateur, le dashboard est excellent. Virements Orange Money le lendemain. Je recommande !"</p><div class="rev-foot"><div class="rev-av" style="background:linear-gradient(135deg,#F39C12,#E74C3C)">O</div><div><div class="rev-name">Omar Sow</div><div class="rev-loc">Almadies — Restaurateur</div></div></div></div>
+  </div>
+</div></div>
+
+<!-- CTA -->
+<div class="cta-section" id="cta">
+  <div class="cta-inner">
+    <div class="rv"><span class="tag" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.18)">Commencez maintenant</span></div>
+    <h2 class="h2 rv d1" style="color:#fff;margin-top:12px">Prêt à commander ?</h2>
+    <p class="sub rv d2" style="color:rgba(255,255,255,.5);margin:0 auto 32px">Téléchargez Mokodomo et faites-vous livrer en moins de 20 minutes.</p>
+    <div class="store-row rv d3">
+      <a href="#" class="store-a store-main"><span class="store-ico">▶</span><div class="store-lbl"><small>Disponible sur</small><strong>Google Play</strong></div></a>
+      <a href="#" class="store-a store-sec"><span class="store-ico">📲</span><div class="store-lbl"><small>Télécharger l'</small><strong>APK Direct</strong></div></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+<div class="foot-inner">
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand"><img src="logo_mokodomo.png" alt="Mokodomo"><span>Moko<em>domo</em></span></div>
+      <p class="foot-desc">L'app de livraison pensée pour le Sénégal. Rapide, local, toujours frais.</p>
+      <div class="foot-soc"><a class="fs" href="#">f</a><a class="fs" href="#">ig</a><a class="fs" href="#">𝕏</a><a class="fs" href="#">💬</a></div>
+    </div>
+    <div class="foot-col"><h4>Application</h4><a href="#">Google Play</a><a href="#">APK Direct</a><a href="#">Nouveautés</a><a href="#">Support</a></div>
+    <div class="foot-col"><h4>Restaurateurs</h4><a href="#">Devenir partenaire</a><a href="#">Dashboard</a><a href="#">Tarifs</a><a href="#">Contact</a></div>
+    <div class="foot-col"><h4>Légal</h4><a href="#">Confidentialité</a><a href="#">Conditions</a><a href="#">Cookies</a></div>
+  </div>
+  <div class="foot-bottom">
+    <div class="foot-copy">© 2025 Mokodomo. Fait avec ❤️ au Sénégal 🇸🇳</div>
+    <div class="foot-pays"><span class="fp">Wave</span><span class="fp">Orange Money</span><span class="fp">Free Money</span></div>
+  </div>
+</div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
