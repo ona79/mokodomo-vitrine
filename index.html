@@ -24,6 +24,8 @@
     <li><a href="#partners">Partenaires</a></li>
     <li><a href="#reviews">Avis</a></li>
   </ul>
+  <button class="btn-contact" onclick="openModal('contact')">✉ Contact</button>
+  <a href="#cta" class="nav-btn" onclick="openModal('partner');return false">Devenir partenaire</a>
   <a href="#cta" class="nav-btn">↓ Télécharger</a>
   <button class="hamburger" id="burger"><span></span><span></span><span></span></button>
 </nav>
@@ -49,8 +51,8 @@
     <div class="hero-badge">🇸🇳 Disponible au Sénégal</div>
 
     <h1 class="hero-h1">
-      <span class="or">Mokodomo</span> — <br>
-       respecte votre faim.
+      <span class="or">Mokodomo</span> —<br>
+    respecte votre faim.
     </h1>
 
     <p class="hero-p">Wave · Orange Money · 18 min chrono — vos plats sénégalais préférés livrés chauds à votre porte.</p>
@@ -317,7 +319,7 @@
         <li class="cli"><span class="cli-dot">✓</span>Virements automatiques Wave ou Orange Money</li>
         <li class="cli"><span class="cli-dot">✓</span>Support 7j/7 en français et wolof</li>
       </ul>
-      <a href="#" class="btn-dark">Devenir partenaire →</a>
+      <button class="btn-dark" onclick="openModal('partner')">Devenir partenaire →</button>
     </div>
     <div class="dash rv-right d1">
       <div class="dash-top"><span class="dash-title">Dashboard Restaurateur</span><span class="dash-live">En direct</span></div>
@@ -387,5 +389,172 @@
 </footer>
 
 <script src="app.js"></script>
+
+<!-- ══ MODAL CONTACT ══ -->
+<div class="modal-overlay" id="modal-contact">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('contact')">✕</button>
+
+    <!-- Formulaire -->
+    <div class="modal-form" id="form-contact">
+      <div class="modal-tag">✉ Nous contacter</div>
+      <div class="modal-title">Une question ?</div>
+      <p class="modal-sub">Notre équipe vous répond sous 24h. N'hésitez pas à nous écrire.</p>
+
+      <form class="form-group" onsubmit="submitForm(event,'contact')">
+        <div class="form-row">
+          <div class="field">
+            <label>Prénom *</label>
+            <input type="text" placeholder="Amadou" required>
+          </div>
+          <div class="field">
+            <label>Nom *</label>
+            <input type="text" placeholder="Diallo" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>Email *</label>
+          <input type="email" placeholder="amadou@email.com" required>
+        </div>
+        <div class="field">
+          <label>Téléphone (WhatsApp)</label>
+          <input type="tel" placeholder="+221 77 000 00 00">
+        </div>
+        <div class="field">
+          <label>Sujet *</label>
+          <select required>
+            <option value="" disabled selected>Choisir un sujet</option>
+            <option>Problème de commande</option>
+            <option>Question sur l'application</option>
+            <option>Signaler un bug</option>
+            <option>Suggestion</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Message *</label>
+          <textarea placeholder="Décrivez votre demande..." required></textarea>
+        </div>
+        <div class="check-field">
+          <input type="checkbox" id="rgpd-contact" required>
+          <label for="rgpd-contact">J'accepte que mes données soient utilisées pour traiter ma demande conformément à la <a href="#">politique de confidentialité</a> de Mokodomo.</label>
+        </div>
+        <button type="submit" class="btn-submit">Envoyer le message →</button>
+      </form>
+    </div>
+
+    <!-- Succès -->
+    <div class="modal-success" id="success-contact">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Message envoyé !</div>
+      <p class="success-sub">Merci pour votre message. Notre équipe vous répondra dans les 24 heures.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL PARTENAIRE ══ -->
+<div class="modal-overlay" id="modal-partner">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('partner')">✕</button>
+
+    <!-- Formulaire -->
+    <div class="modal-form" id="form-partner">
+      <div class="modal-tag">🍽️ Restaurateurs</div>
+      <div class="modal-title">Rejoignez Mokodomo</div>
+      <p class="modal-sub">Augmentez vos ventes dès demain. Remplissez ce formulaire et notre équipe vous contacte sous 48h.</p>
+
+      <form class="form-group" onsubmit="submitForm(event,'partner')">
+        <div class="modal-divider"></div>
+        <p style="font-size:.72rem;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.1em">Votre restaurant</p>
+
+        <div class="field">
+          <label>Nom du restaurant *</label>
+          <input type="text" placeholder="Ex: Chez Mama Coumba" required>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Type de cuisine *</label>
+            <select required>
+              <option value="" disabled selected>Choisir</option>
+              <option>Cuisine sénégalaise</option>
+              <option>Burgers & Fast food</option>
+              <option>Pizzas</option>
+              <option>Cuisine africaine</option>
+              <option>Cuisine internationale</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Ville *</label>
+            <select required>
+              <option value="" disabled selected>Choisir</option>
+              <option>Dakar</option>
+              <option>Thiès</option>
+              <option>Saint-Louis</option>
+              <option>Ziguinchor</option>
+              <option>Kaolack</option>
+              <option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Adresse du restaurant *</label>
+          <input type="text" placeholder="Quartier, rue..." required>
+        </div>
+
+        <div class="modal-divider"></div>
+        <p style="font-size:.72rem;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.1em">Votre contact</p>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Prénom & Nom *</label>
+            <input type="text" placeholder="Votre nom" required>
+          </div>
+          <div class="field">
+            <label>Rôle</label>
+            <select>
+              <option>Propriétaire</option>
+              <option>Gérant</option>
+              <option>Responsable marketing</option>
+              <option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>WhatsApp *</label>
+            <input type="tel" placeholder="+221 77 000 00 00" required>
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" placeholder="email@resto.com">
+          </div>
+        </div>
+        <div class="field">
+          <label>Nombre de plats au menu</label>
+          <select>
+            <option>Moins de 10</option>
+            <option>10 – 30</option>
+            <option>30 – 60</option>
+            <option>Plus de 60</option>
+          </select>
+        </div>
+        <div class="check-field">
+          <input type="checkbox" id="rgpd-partner" required>
+          <label for="rgpd-partner">J'accepte les <a href="#">conditions partenaires</a> Mokodomo et la <a href="#">politique de confidentialité</a>.</label>
+        </div>
+        <button type="submit" class="btn-submit">Envoyer ma candidature →</button>
+      </form>
+    </div>
+
+    <!-- Succès -->
+    <div class="modal-success" id="success-partner">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">Candidature reçue !</div>
+      <p class="success-sub">Bienvenue dans la famille Mokodomo. Notre équipe vous contacte dans les 48 heures pour finaliser votre inscription.</p>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

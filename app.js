@@ -233,3 +233,77 @@ document.getElementById('mobClose').addEventListener('click',closeMob);
 document.getElementById('mobNav').addEventListener('click',e=>{if(e.target===document.getElementById('mobNav'))closeMob();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMob();});
 function closeMob(){document.getElementById('mobNav').classList.remove('open');document.body.style.overflow='';}
+
+// ══ MODALS ══
+function openModal(id) {
+  const overlay = document.getElementById('modal-' + id);
+  if (!overlay) return;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Reset état précédent
+  const form = document.getElementById('form-' + id);
+  const success = document.getElementById('success-' + id);
+  if (form) { form.classList.remove('hide'); }
+  if (success) { success.classList.remove('show'); }
+}
+
+function closeModal(id) {
+  const overlay = document.getElementById('modal-' + id);
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  // Rétablir overflow seulement si aucun autre modal ouvert
+  const anyOpen = document.querySelector('.modal-overlay.open');
+  if (!anyOpen) document.body.style.overflow = '';
+}
+
+// Fermer si clic sur l'overlay
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) {
+      const id = overlay.id.replace('modal-', '');
+      closeModal(id);
+    }
+  });
+});
+
+// Fermer avec Échap (en plus du nav mobile)
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(overlay => {
+      const id = overlay.id.replace('modal-', '');
+      closeModal(id);
+    });
+    closeMob();
+  }
+});
+
+// Soumission formulaire
+function submitForm(e, id) {
+  e.preventDefault();
+  const form = document.getElementById('form-' + id);
+  const success = document.getElementById('success-' + id);
+  const btn = form.querySelector('.btn-submit');
+
+  // Animation loading sur le bouton
+  btn.textContent = 'Envoi en cours...';
+  btn.style.opacity = '.7';
+
+  // Simuler envoi (à remplacer par fetch vers ton backend)
+  setTimeout(() => {
+    form.classList.add('hide');
+    success.classList.add('show');
+  }, 1200);
+}
+
+// Ajouter magnetic effect aux boutons submit
+document.querySelectorAll('.btn-submit').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const ox = e.clientX - r.left - r.width/2;
+    const oy = e.clientY - r.top - r.height/2;
+    btn.style.transform = `translate(${ox*.1}px,${oy*.1}px) translateY(-2px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});

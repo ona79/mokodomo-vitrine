@@ -412,3 +412,138 @@ body.js-ready .rv.on,body.js-ready .rv-card.on,body.js-ready .rv-left.on,body.js
   .foot-grid{grid-template-columns:1fr}
   .foot-bottom{flex-direction:column;text-align:center}
 }
+
+/* ══════════════════════════════
+   MODALS — Contact + Partenaire
+══════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:9000;
+  background:rgba(0,0,0,0.45);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+  padding:20px;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+
+.modal{
+  background:#ffffff;
+  border-radius:24px;
+  width:100%;max-width:520px;
+  max-height:90vh;overflow-y:auto;
+  padding:40px;
+  position:relative;
+  transform:translateY(24px) scale(.97);
+  transition:transform .35s cubic-bezier(.16,1,.3,1);
+  box-shadow:0 30px 80px rgba(0,0,0,.18);
+}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+
+.modal-close{
+  position:absolute;top:18px;right:18px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(0,0,0,.06);border:none;
+  font-size:.9rem;cursor:none;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--t2);transition:background .2s,color .2s;
+}
+.modal-close:hover{background:rgba(0,0,0,.1);color:var(--t1)}
+
+.modal-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.62rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--or);
+  background:var(--org);border:1px solid rgba(245,132,31,.14);
+  padding:3px 10px;border-radius:20px;margin-bottom:12px;
+}
+.modal-title{
+  font-family:var(--disp);font-size:1.5rem;
+  font-weight:800;letter-spacing:-.02em;
+  color:var(--t1);margin-bottom:6px;
+}
+.modal-sub{font-size:.84rem;color:var(--t2);line-height:1.6;margin-bottom:28px}
+
+/* Form elements */
+.form-group{display:flex;flex-direction:column;gap:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:.75rem;font-weight:600;color:var(--t1);letter-spacing:.01em}
+.field input,.field select,.field textarea{
+  padding:11px 14px;
+  border-radius:10px;
+  border:1.5px solid var(--b2);
+  background:rgba(255,255,255,.7);
+  font-family:var(--font);font-size:.84rem;color:var(--t1);
+  outline:none;
+  transition:border-color .2s,box-shadow .2s;
+  width:100%;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--or);
+  box-shadow:0 0 0 3px rgba(245,132,31,.1);
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--t3)}
+.field textarea{resize:vertical;min-height:100px;line-height:1.6}
+.field select{cursor:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+
+/* Checkbox custom */
+.check-field{display:flex;align-items:flex-start;gap:10px;cursor:none}
+.check-field input[type=checkbox]{
+  width:18px;height:18px;min-width:18px;
+  border-radius:5px;border:1.5px solid var(--b2);
+  accent-color:var(--or);cursor:none;margin-top:1px;
+}
+.check-field label{font-size:.78rem;color:var(--t2);line-height:1.55;cursor:none}
+.check-field label a{color:var(--or);text-decoration:none}
+.check-field label a:hover{text-decoration:underline}
+
+/* Submit */
+.btn-submit{
+  width:100%;padding:13px;border-radius:12px;
+  background:var(--or);color:#fff;border:none;
+  font-family:var(--font);font-size:.88rem;font-weight:700;
+  cursor:none;letter-spacing:.01em;
+  transition:background .2s,transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(245,132,31,.25);
+  margin-top:4px;
+}
+.btn-submit:hover{background:var(--or2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,132,31,.35)}
+
+/* Success state */
+.modal-success{
+  display:none;flex-direction:column;align-items:center;
+  text-align:center;padding:20px 0;
+}
+.modal-success.show{display:flex}
+.modal-form.hide{display:none}
+.success-icon{
+  width:64px;height:64px;border-radius:50%;
+  background:rgba(245,132,31,.1);border:2px solid rgba(245,132,31,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;margin-bottom:16px;
+  animation:popIn .4s var(--ease) both;
+}
+@keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.success-title{font-family:var(--disp);font-size:1.3rem;font-weight:800;color:var(--t1);margin-bottom:8px}
+.success-sub{font-size:.84rem;color:var(--t2);line-height:1.6;max-width:340px}
+
+/* Divider */
+.modal-divider{height:1px;background:var(--b);margin:4px 0}
+
+/* Trigger buttons */
+.btn-contact{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(0,0,0,.06);border:1px solid var(--b2);
+  color:var(--t1);font-size:.78rem;font-weight:600;
+  padding:9px 18px;border-radius:50px;
+  text-decoration:none;cursor:none;
+  transition:background .2s,border-color .2s;
+}
+.btn-contact:hover{background:rgba(0,0,0,.1);border-color:var(--b2)}
+
+@media(max-width:600px){
+  .modal{padding:28px 20px;border-radius:18px}
+  .form-row{grid-template-columns:1fr}
+}
