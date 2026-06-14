@@ -8,7 +8,7 @@ let mx=0,my=0,rx=0,ry=0,active=false;
 cur.style.opacity='0'; ring.style.opacity='0';
 
 function setP(el,x,y){
-  el.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%)`;
+  el.style.transform=`translate(calc(${x}px - 50%),calc(${y}px - 50%))`;
 }
 
 document.addEventListener('mousemove',e=>{
@@ -60,9 +60,13 @@ const canvas = document.getElementById('particles-canvas');
 const ctx = canvas.getContext('2d');
 let W,H,pts=[];
 
-function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+function resize(){
+  W = canvas.width = innerWidth;
+  H = canvas.height = innerHeight;
+}
 resize();
 window.addEventListener('resize',resize);
+
 
 // Palette antigravity : tirets colorés
 const COLORS=[
