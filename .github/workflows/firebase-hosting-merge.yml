@@ -16,4 +16,4 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MOKODOMO_14954 }}
           channelId: live
-          projectId: mokodomo-14954
+          projectId: mokodomo

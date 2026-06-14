@@ -1,15 +1,5 @@
 {
   "projects": {
-    "default": "mokodomo-14954"
-  },
-  "targets": {
-    "mokodomo-14954": {
-      "hosting": {
-        "main": [
-          "mokodomo"
-        ]
-      }
-    }
-  },
-  "etags": {}
+    "default": "mokodomo"
+  }
 }
