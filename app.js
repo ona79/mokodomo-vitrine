@@ -234,76 +234,154 @@ document.getElementById('mobNav').addEventListener('click',e=>{if(e.target===doc
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMob();});
 function closeMob(){document.getElementById('mobNav').classList.remove('open');document.body.style.overflow='';}
 
-// ══ MODALS ══
+// ══════════════════════════════════
+// MODALS — ouverture/fermeture/submit
+// ══════════════════════════════════
+
 function openModal(id) {
   const overlay = document.getElementById('modal-' + id);
   if (!overlay) return;
+
+  // Reset du formulaire
+  const formEl = document.getElementById('form-' + id);
+  const successEl = document.getElementById('success-' + id);
+  if (formEl) {
+    formEl.classList.remove('hide');
+    // Réinitialiser les champs
+    const form = formEl.querySelector('form');
+    if (form) form.reset();
+    // Reset étoiles si modal avis
+    if (id === 'reviews') resetStars();
+  }
+  if (successEl) successEl.classList.remove('show');
+
+  // Reset bouton submit
+  const btn = overlay.querySelector('.btn-submit');
+  if (btn) { btn.textContent = btn.dataset.label || btn.textContent; btn.style.opacity = '1'; }
+
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
-  // Reset état précédent
-  const form = document.getElementById('form-' + id);
-  const success = document.getElementById('success-' + id);
-  if (form) { form.classList.remove('hide'); }
-  if (success) { success.classList.remove('show'); }
+  document.body.style.position = 'relative';
+  // Réinitialiser les étoiles si modal avis
+  if (id === 'reviews') {
+    setTimeout(() => { resetStars(); initStars(); }, 50);
+  }
 }
 
 function closeModal(id) {
   const overlay = document.getElementById('modal-' + id);
   if (!overlay) return;
   overlay.classList.remove('open');
-  // Rétablir overflow seulement si aucun autre modal ouvert
-  const anyOpen = document.querySelector('.modal-overlay.open');
-  if (!anyOpen) document.body.style.overflow = '';
+  if (!document.querySelector('.modal-overlay.open')) {
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+  }
 }
 
-// Fermer si clic sur l'overlay
+// Clic overlay → fermer
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
   overlay.addEventListener('click', e => {
-    if (e.target === overlay) {
-      const id = overlay.id.replace('modal-', '');
-      closeModal(id);
-    }
+    if (e.target === overlay) closeModal(overlay.id.replace('modal-', ''));
   });
 });
 
-// Fermer avec Échap (en plus du nav mobile)
+// Échap → fermer modals + nav mobile
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay.open').forEach(overlay => {
-      const id = overlay.id.replace('modal-', '');
-      closeModal(id);
-    });
-    closeMob();
-  }
+  if (e.key !== 'Escape') return;
+  document.querySelectorAll('.modal-overlay.open').forEach(o =>
+    closeModal(o.id.replace('modal-', ''))
+  );
+  closeMob();
 });
 
-// Soumission formulaire
+// Soumission — animation + succès
 function submitForm(e, id) {
   e.preventDefault();
-  const form = document.getElementById('form-' + id);
-  const success = document.getElementById('success-' + id);
-  const btn = form.querySelector('.btn-submit');
+  const formEl = document.getElementById('form-' + id);
+  const successEl = document.getElementById('success-' + id);
+  const btn = formEl.querySelector('.btn-submit');
 
-  // Animation loading sur le bouton
+  // Garder le label original
+  if (!btn.dataset.label) btn.dataset.label = btn.textContent;
   btn.textContent = 'Envoi en cours...';
-  btn.style.opacity = '.7';
+  btn.style.opacity = '.65';
+  btn.disabled = true;
 
-  // Simuler envoi (à remplacer par fetch vers ton backend)
+  // Envoi simulé (remplacer par fetch vers ton API)
   setTimeout(() => {
-    form.classList.add('hide');
-    success.classList.add('show');
+    formEl.classList.add('hide');
+    if (successEl) successEl.classList.add('show');
+    btn.disabled = false;
   }, 1200);
 }
 
-// Ajouter magnetic effect aux boutons submit
+// ── STAR RATING — version définitive ──
+let currentRating = 0;
+const starLabels = ['','Mauvais 😕','Moyen 😐','Bien 🙂','Très bien 😊','Excellent 🤩'];
+
+function paintStars(hover, selected) {
+  document.querySelectorAll('.star').forEach(s => {
+    const v = parseInt(s.dataset.val);
+    if (hover > 0) {
+      s.style.color = v <= hover ? '#FF9A3C' : '#ddd';
+    } else {
+      s.style.color = v <= selected ? '#F5841F' : '#ddd';
+    }
+  });
+}
+
+function resetStars() {
+  currentRating = 0;
+  paintStars(0, 0);
+  const lbl = document.getElementById('starLabel');
+  if (lbl) {
+    lbl.textContent = 'Cliquez pour noter';
+    lbl.style.color = '#999';
+    lbl.style.fontWeight = '400';
+  }
+  const inp = document.getElementById('starValue');
+  if (inp) inp.value = '';
+}
+
+function initStars() {
+  const stars = document.querySelectorAll('.star');
+  if (!stars.length) return;
+
+  // Init couleur grise
+  stars.forEach(s => {
+    s.style.color = '#ddd';
+    s.style.cursor = 'pointer';
+    s.style.fontSize = '2.2rem';
+  });
+
+  stars.forEach(star => {
+    const val = parseInt(star.dataset.val);
+
+    star.addEventListener('mouseenter', () => paintStars(val, currentRating));
+    star.addEventListener('mouseleave', () => paintStars(0, currentRating));
+    star.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      currentRating = val;
+      const inp = document.getElementById('starValue');
+      if (inp) inp.value = val;
+      paintStars(0, val);
+      const lbl = document.getElementById('starLabel');
+      if (lbl) {
+        lbl.textContent = starLabels[val];
+        lbl.style.color = '#F5841F';
+        lbl.style.fontWeight = '700';
+      }
+    });
+  });
+}
+
+
+// Magnetic sur btn-submit
 document.querySelectorAll('.btn-submit').forEach(btn => {
   btn.addEventListener('mousemove', e => {
     const r = btn.getBoundingClientRect();
-    const ox = e.clientX - r.left - r.width/2;
-    const oy = e.clientY - r.top - r.height/2;
-    btn.style.transform = `translate(${ox*.1}px,${oy*.1}px) translateY(-2px)`;
+    btn.style.transform = `translate(${(e.clientX-r.left-r.width/2)*.1}px,${(e.clientY-r.top-r.height/2)*.1}px) translateY(-2px)`;
   });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
-  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
 });
